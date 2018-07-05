@@ -8,9 +8,16 @@
     </head>
     <body>
         <p>Welcome to die.</p>
-        <h3 id="status">Offline</h3>
+        <ol id='messages'>
+
+        </ol>
+        <form id="message-form">
+            <input name='message' type="text" placeholder="Message here please."/>
+            <button>Submit</button>
+        </form>
 
         <script src="/socket.io/socket.io.js"></script>
+        <script src="./jquery-3.3.1.js"></script>
         <script src="./index.js"></script>
     </body>
 </html>
