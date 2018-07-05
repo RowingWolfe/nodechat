@@ -1,0 +1,3 @@
+force lowercase for all rooms
+unique usernames
+list of active chats with number of users.
