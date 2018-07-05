@@ -61,6 +61,15 @@ socket.on('connect', () => {
 socket.on('disconnect', () => {
     console.log('Disconnected from server');
 });
+
+socket.on('updateUserList', (users) => {
+    let ol = $('<ol></ol>');
+    users.forEach((user) => {
+        ol.append($('<li></li>').text(user));
+    });
+    $('#users').html(ol);
+    console.log(users);
+})
 socket.emit('createMessage', {}, (data) => {
     console.log('Got it...', data);
     
@@ -72,7 +81,6 @@ $('#message-form').on('submit', (e) => {
     var messageTextbox = $('[name=message]');
 
     socket.emit('createMessage', {
-        from: 'User',
         text: $(messageTextbox).val()
     }, function(){
         $(messageTextbox).val('');
