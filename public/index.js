@@ -1,5 +1,23 @@
 
 var socket = io();
+const scrollToBottom = () =>{
+    //Selectors
+    let messages = $('#messages');
+    let newMessage = messages.children('li:last-child');
+    //Heights
+    let clientHeight = messages.prop('clientHeight');
+    let scrollTop = messages.prop('scrollTop');
+    let scrollHeight = messages.prop('scrollHeight');
+    let newMessageHeight = newMessage.innerHeight();
+    let lastMessageHeight = newMessage.prev().innerHeight();
+
+    if(clientHeight + scrollTop + newMessageHeight + lastMessageHeight >= scrollHeight){
+        //Should scroll to bottom.
+        messages.scrollTop(scrollHeight);
+    }
+
+}
+
 socket.on('connect', () => {
     console.log('Connected.');
 
@@ -13,6 +31,7 @@ socket.on('connect', () => {
         });
 
         $('#messages').append(html);
+        scrollToBottom();
     });
 
     socket.on('newLocationMessage', (message) =>{
@@ -25,23 +44,13 @@ socket.on('connect', () => {
         });
 
         $('#messages').append(html);
-
-        // let li = $('<li></li>');
-        // let a = $('<a target="_blank">Current Location</a>');
-
-        // li.text(`${message.from} ${formattedTime}: `);
-        // a.attr('href', message.url);
-        // li.append(a);
-        // $('#messages').append(li);
+        scrollToBottom();
     });
 });
 socket.on('disconnect', () => {
     console.log('Disconnected from server');
 });
-socket.emit('createMessage', {
-    from: 'Doooood',
-    text: 'Quack.'
-}, (data) => {
+socket.emit('createMessage', {}, (data) => {
     console.log('Got it...', data);
     
 });
