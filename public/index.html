@@ -5,17 +5,25 @@
         <title>
             Ahoy
         </title>
+        <link rel="stylesheet" href="./css/styles.css">
     </head>
-    <body>
-        <p>Welcome to die.</p>
-        <ol id='messages'>
+    <body class='chat'>
+        <div class="chat__sidebar">
+            <h3>Assholes in the room</h3>
+            <div id="users"></div>
+        </div>
+        <div class="chat__main">
+                <ol class="chat__messages" id='messages'>
 
-        </ol>
-        <form id="message-form">
-            <input name='message' type="text" placeholder="Message here please."/>
-            <button>Submit</button>
-        </form>
-        <button id='sendGeo'>Send Location</button>
+                    </ol>
+                    <div class="chat__footer">
+                    <form id="message-form">
+                        <input name='message' type="text" placeholder="Message" autofocus autocomplete="off"/>
+                        <button>Submit</button>
+                    </form>
+                    <button id='sendGeo'>Send Location</button>
+                    </div>
+                </div>
         <script src="/socket.io/socket.io.js"></script>
         <script src="./jquery-3.3.1.js"></script>
         <script src="./index.js"></script>
