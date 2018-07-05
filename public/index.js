@@ -3,17 +3,19 @@ socket.on('connect', () => {
     console.log('Connected.');
 
     socket.on('newMessage', (message) => {
+        let formattedTime = moment(message.createdAt).format('h:mm a');
         console.log('newMessage: ', message);
         var li = $('<li></li>');
-    li.text(`${message.from}: ${message.text}`);
+    li.text(`${message.from} ${formattedTime}: ${message.text}`);
     $('#messages').append(li);
     });
 
     socket.on('newLocationMessage', (message) =>{
+        let formattedTime = moment(message.createdAt).format('h:mm a');
         let li = $('<li></li>');
         let a = $('<a target="_blank">Current Location</a>');
 
-        li.text(`${message.from}: `);
+        li.text(`${message.from} ${formattedTime}: `);
         a.attr('href', message.url);
         li.append(a);
         $('#messages').append(li);
